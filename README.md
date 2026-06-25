@@ -47,10 +47,15 @@ User question
 ├── docs/
 │   └── .gitkeep
 ├── scripts/
-│   └── .gitkeep
+│   ├── .gitkeep
+│   └── seed_sample_data.py
 ├── src/
 │   └── financial_analyst_langgraph/
-│       └── __init__.py
+│       ├── __init__.py
+│       ├── __main__.py
+│       ├── config.py
+│       ├── database.py
+│       └── main.py
 ├── tests/
 │   └── .gitkeep
 ├── .env.example
@@ -95,6 +100,48 @@ ALPHA_VANTAGE_API_KEY=your_alpha_vantage_key_here
 ## Development Notes
 
 This repository is being built as a learning project. The first version will focus on the LangGraph workflow and a local SQLite sample database. Once the graph is stable, a frontend can render the graph's structured output as text, tables, and charts.
+
+## Run The App
+
+During early development, run the app with the `src` folder on the Python path:
+
+```bash
+PYTHONPATH=src python3 -m financial_analyst_langgraph
+```
+
+Then choose:
+
+```text
+1. Use sample company
+```
+
+The app will create:
+
+```text
+data/sample_financials.sqlite
+```
+
+You can also seed the sample database directly:
+
+```bash
+PYTHONPATH=src python3 scripts/seed_sample_data.py
+```
+
+The sample database contains five years of annual data across:
+
+- `companies`
+- `income_statements`
+- `balance_sheets`
+- `cash_flow_statements`
+
+For the cash flow statement:
+
+```text
+change_in_cash = operating_cash_flow + investing_cash_flow + financing_cash_flow
+free_cash_flow = operating_cash_flow + capex
+```
+
+In this project, `capex` is stored as a negative cash outflow.
 
 ## Git Quick Start
 
